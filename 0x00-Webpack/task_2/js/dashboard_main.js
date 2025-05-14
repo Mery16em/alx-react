@@ -1,25 +1,23 @@
-import $ from 'jquery';
-import _ from 'lodash';
-import '../css/main.css';
+const $ = require( "jquery" );
+// Load the full build
+const _ = require("lodash");
+import "../css/main.css";
 
-$(document).ready(function() {
-  // Add logo element
-  $('body').append('<div id="logo"></div>');
-  
-  // Add other elements
-  $('body').append('<p>ALX Dashboard</p>');
-  $('body').append('<p>Dashboard data for the students</p>');
-  $('body').append('<button>Click here to get started</button>');
-  $('body').append('<p id="count">0 clicks on the button</p>');
-  $('body').append('<p>Copyright - ALX</p>');
+let count = 0;
 
-  // Counter functionality
-  let count = 0;
-  function updateCounter() {
-    count++;
-    $('#count').text(`${count} clicks on the button`);
-  }
+function updateCounter() {
+  count++;
+  $( "#count" ).text(`${count} clicks on the button` );
+}
 
-  // Bind debounced function to button click
-  $('button').on('click', _.debounce(updateCounter, 300));
-});
+const $button = $("<button>Click here to get started</button>").on(
+  "click",
+  _.debounce( updateCounter, 500, { leading: true, trailing: false })
+);
+
+$('body').append("<div id='logo'></div>");
+$('body').append("<p>Holberton Dashboard</p>");
+$('body').append("<p>Dashboard data for the students</p>");
+$('body').append($button);
+$('body').append("<p id='count'></p>");
+$('body').append("<p>Copyright - Holberton School</p>");
